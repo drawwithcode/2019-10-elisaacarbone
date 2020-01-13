@@ -1,7 +1,7 @@
-var sun, mercury, venus, earth, moon, mars, jupiter, saturn, uranus, neptune, stars;
-var radius = 80;
+var sun, mercury, venus, earth, moon, mars, jupiter, saturn, uranus, neptune, stars; //define the var for the textures
+var radius = 80; //define the sun radius
 
-function preload(){
+function preload(){ //load the textures and the font
   sun = loadImage("assets/sun.jpg");
   mercury = loadImage("assets/mercury.jpg");
   venus = loadImage("assets/venus.jpg");
@@ -12,17 +12,31 @@ function preload(){
   uranus = loadImage("assets/uranus.jpg");
   neptune = loadImage("assets/neptune.jpg");
   stars = loadImage("assets/stars.jpg");
+  bambino = loadFont('assets/Bambino.otf');
 }
 
-function setup() {
+function setup() { //create a canvas that recognizes 3D
   createCanvas(windowWidth, windowHeight, WEBGL);
 }
 
 function draw() {
   background(0);
 
+
+  //insert the text
+  textAlign(CENTER);
+  fill(255);
+  textFont(bambino);
+  textSize(15)
+  text("The sun went off! Move the mouse to light the Solar System from different points!", 0, height/2 - 50);
+
+//create the ambient light
   ambientLight(50, 50, 100);
-  directionalLight(255, 255, 255, -0.5, 0, -0.2);
+
+  var dirX = (mouseX / width - 0.5) * 2;
+  var dirY = (mouseY / height - 0.5) * 2;
+  directionalLight(255, 255, 255, dirX, dirY, -0.1);
+
 
   noStroke();
   translate(radius/4, -radius/4);
